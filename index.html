@@ -1,0 +1,94 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Switch Time</title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <script src="javascript/jquery-2.1.1.min.js"></script>
+    <script src="javascript/jquery-ui.js"></script>
+
+    <script>
+        $(function(){
+            $("ul").sortable({
+                connectWith: "ul"
+            });
+        });
+
+        function addPerson() {
+            var listItem = document.createElement("li");
+
+            var textArea = document.createElement("input");
+            var typeAtt = document.createAttribute("type");
+            typeAtt.value = "text";
+
+            var classAtt = document.createAttribute("class");
+            classAtt.value = "textarea";
+
+            var maxlengthAtt = document.createAttribute("maxlength");
+            maxlengthAtt.value = "15";
+
+            textArea.setAttributeNode(typeAtt);
+            textArea.setAttributeNode(classAtt);
+            textArea.setAttributeNode(maxlengthAtt);
+
+            listItem.appendChild(textArea);
+
+            var waitlist = document.getElementById("waitlist");
+            waitlist.appendChild(listItem);
+        }
+
+        function addTable() {
+
+            var container = document.createElement("div");
+            var containerClass = document.createAttribute("class");
+            containerClass.value = "container";
+            container.setAttributeNode(containerClass);
+
+            var containerHeader = document.createElement("div");
+            var headerClass = document.createAttribute("class");
+            headerClass.value = "container-header";
+            containerHeader.setAttributeNode(headerClass);
+
+            var headerContent = document.createElement("div");
+            var contentClass = document.createAttribute("class");
+            contentClass.value = "header-content";
+            headerContent.setAttributeNode(contentClass);
+            headerContent.innerHTML = "Table "+(document.getElementsByClassName("header-content").length+2);
+
+            var list = document.createElement("ul");
+
+            containerHeader.appendChild(headerContent);
+            container.appendChild(containerHeader);
+            container.appendChild(list);
+
+            var waitlistContainer = document.getElementById("waitlist-container");
+            var bodyElement = document.body;
+            bodyElement.insertBefore(container, waitlistContainer);
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="container">
+        <div id="menu" class="container-header">Switch Time</div>
+    </div>
+
+    <div class="container">
+        <div class="container-header">
+            <div class="header-content1">Table 1<button onclick="addTable();">+</button></div>
+        </div>
+        <ul id="table1">
+        </ul>
+    </div>
+
+    <div class="container" id="waitlist-container">
+        <div class="container-header">
+            <div class="header-content1">Wait List<button onclick="addPerson();">+</button></div>
+        </div>
+        <ul id="waitlist">
+            <li><input type="text" class="textarea" maxlength="15"/></li>
+        </ul>
+    </div>  
+
+</body>
+</html>
