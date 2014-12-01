@@ -30,12 +30,15 @@ li {
     padding: 10px 10px 10px 10px;
     border:2px solid grey;
     border-radius: 25px 25px 0px 0px;
-    text-align: center;
+    text-align: left;
     color: grey;
     font-family: Verdana;
 }
-.header-content1 {
-    margin-left: 25px;
+.header-content,.header-content2{
+    display:inline;
+}
+.buttons {
+    display: inline;
 }
 #menu {
     border-radius: 5px;
@@ -43,8 +46,10 @@ li {
 button {
     float:right;
     background-color:white;
-    border-radius: 0px 10px 0px 0px;
     color:grey;
     font-family: Verdana;
     outline:none;
+}
+.add-button {
+    border-radius: 0px 10px 0px 0px;
 }
