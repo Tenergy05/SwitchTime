@@ -27,7 +27,6 @@ function timer(timeStart) {
             decTime(i+1)
     time += 1000;
     var timeAdjust = Date.now() - timeStart-time;
-    console.log(timeAdjust);
     setTimeout(function () { timer(timeStart) }, 1000 - timeAdjust);
 }
 
