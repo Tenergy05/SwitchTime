@@ -94,7 +94,7 @@
         function addTable() {
 
             timerStarted.push(false);
-            var tableNum = document.getElementsByClassName("header-content2").length + 2;
+            var tableNum = document.getElementsByClassName("header-content").length + 1;
 
             var container = document.createElement("div");
             var containerClass = document.createAttribute("class");
@@ -108,12 +108,12 @@
 
             var headerContent = document.createElement("div");
             var contentClass = document.createAttribute("class");
-            contentClass.value = "header-content2";
+            contentClass.value = "header-content";
             var headerId = document.createAttribute("id");
             headerId.value = "t" + tableNum;
             headerContent.setAttributeNode(contentClass);
             headerContent.setAttributeNode(headerId);
-            headerContent.innerText = "Table "+tableNum+" 15:00";
+            headerContent.innerText = "Table "+tableNum+" "+document.getElementById("defaultTime").value+":00";
 
             var buttons = document.createElement("div");
             buttonClass = document.createAttribute("class");
@@ -141,22 +141,49 @@
             var bodyElement = document.body;
             bodyElement.insertBefore(container, waitlistContainer);
 
+            var removeButton = document.getElementById("remove-button");
+            if (removeButton.disabled)
+                removeButton.disabled = false;
+
             $("ul").sortable({
                 connectWith: "ul"
             });
+        }
+
+        function removeTable() {
+            var containers = document.getElementsByClassName("container");
+            var lastTable = containers.item(containers.length - 2);
+            document.body.removeChild(lastTable);
+            var numTables = document.getElementsByClassName("buttons").length;
+            if (numTables === 1) {
+                removeButton = document.getElementById("remove-button");
+                removeButton.disabled = true;
+            }
+        }
+
+        function setTimers() {
+            var timerContent = document.getElementsByClassName("header-content");
+            for (var i = 0; i < timerContent.length; i++) {
+                var s = timerContent.item(i).textContent;
+                timerContent.item(i).textContent = s.substring(0, s.length - 5)+document.getElementById("defaultTime").value+":00";
+            }
         }
     </script>
 </head>
 <body>
     
     <div class="container">
-        <div id="menu" class="container-header">Switch Time</div>
+        <div id="menu" class="container-header">Switch Time
+            <div id="timerSet">
+                <input id="defaultTime" type="number" min="0" max="99" value="15"/>min <button onclick="setTimers()">Set Timers</button>
+            </div>
+        </div>
     </div>
 
     <div class="container">
         <div class="container-header">
             <div class="header-content" id="t1">Table 1 15:00</div>
-            <div class="buttons"><button class="add-button" onclick="addTable();">+</button><button id="s1" onclick="toggleTime(1);">Start</button></div>
+            <div class="buttons"><button class="add-button" onclick="addTable();">+</button><button id="remove-button" disabled onclick="removeTable();">-</button><button id="s1" onclick="toggleTime(1);">Start</button></div>
         </div>
         <ul id="table1">
         </ul>
@@ -164,7 +191,7 @@
 
     <div class="container" id="waitlist-container">
         <div class="container-header">
-            <div class="header-content">Wait List<button class="add-button" onclick="addPerson();">+</button></div>
+            <div class="header-content2">Wait List<button class="add-button" onclick="addPerson();">+</button></div>
         </div>
         <ul id="waitlist">
             <li><input type="text" class="textarea" maxlength="15"/></li>

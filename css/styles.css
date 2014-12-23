@@ -1,4 +1,7 @@
-﻿ul {
+﻿body {
+    background-color: cadetblue;
+}
+ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -23,10 +26,11 @@ li {
 }
 .container {
     width:100%;
-    min-width: 250px;
+    min-width: 300px;
     min-height: 50px;
 }
 .container-header {
+    background-color: white;
     padding: 10px 10px 10px 10px;
     border:2px solid grey;
     border-radius: 25px 25px 0px 0px;
@@ -41,7 +45,17 @@ li {
     display: inline;
 }
 #menu {
+    background-color: darkgray;
     border-radius: 5px;
+    color:white;
+}
+#timerSet {
+    float:right;
+    width:165px;
+}
+#timerSet input {
+    width:35px;
+    text-align:center;
 }
 button {
     float:right;
