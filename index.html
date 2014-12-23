@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <title>Switch Time</title>
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <script src="javascript/jquery-2.1.1.min.js"></script>
@@ -33,7 +34,7 @@
             <div class="header-content2">Wait List<button class="add-button" onclick="addPerson();">+</button></div>
         </div>
         <ul id="waitlist">
-            <li><input type="text" class="textarea" maxlength="15"/></li>
+            <li><input type="text" class="textarea" maxlength="15" onclick="this.focus();" /></li>
         </ul>
     </div>  
 

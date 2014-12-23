@@ -61,6 +61,7 @@ function addPerson() {
     var listItem = document.createElement("li");
 
     var textArea = document.createElement("input");
+
     var typeAtt = document.createAttribute("type");
     typeAtt.value = "text";
 
@@ -70,9 +71,13 @@ function addPerson() {
     var maxlengthAtt = document.createAttribute("maxlength");
     maxlengthAtt.value = "15";
 
+    var onclickAtt = document.createAttribute("onclick");
+    onclickAtt.value = "this.focus();";
+
     textArea.setAttributeNode(typeAtt);
     textArea.setAttributeNode(classAtt);
     textArea.setAttributeNode(maxlengthAtt);
+    textArea.setAttributeNode(onclickAtt);
 
     listItem.appendChild(textArea);
 
@@ -154,6 +159,6 @@ function setTimers() {
     var timerContent = document.getElementsByClassName("header-content");
     for (var i = 0; i < timerContent.length; i++) {
         var s = timerContent.item(i).textContent;
-        timerContent.item(i).textContent = s.substring(0, s.length - 5)+document.getElementById("defaultTime").value+":00";
+        timerContent.item(i).textContent = s.substring(0, s.lastIndexOf(" ")+1) + document.getElementById("defaultTime").value + ":00";
     }
 }
