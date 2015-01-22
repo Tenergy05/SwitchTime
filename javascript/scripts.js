@@ -1,15 +1,19 @@
 var timeTick;
 var time = 0;
-var timerStarted = [false];
+var timerStarted = [false];// stores the states of all timers
 
 $(function(){
-    $("ul").sortable({
-        connectWith: "ul"
+    $("ul").sortable({ // set ul items to be sortable
+        connectWith: "ul" 
     });
     var timeStart = Date.now();
-    timeTick = setTimeout(function () { timer(timeStart) }, 1000);
+    timeTick = setTimeout(function () { timer(timeStart) }, 1000); // start timing
 });
 
+/**
+ * Stops or starts a timer.
+ * @param {number} tableNum - the table number indicating which timer to toggle
+ */
 function toggleTime(tableNum) {
     button = document.getElementById("s" + tableNum);
     if (timerStarted[tableNum - 1]) {
@@ -21,15 +25,27 @@ function toggleTime(tableNum) {
     }
 }
 
+/**
+ * Decrements each activated timer by one second.
+ * Sets a timeout for the next decrement to occur such that the timers stay accurate.
+ */
 function timer(timeStart) {
     for(var i=0;i<timerStarted.length;i++)
         if (timerStarted[i])
             decTime(i+1)
-    time += 1000;
+    time += 1000; // increase the time elapsed by 1000 milliseconds
+
+    // get the difference between actual and recorded elapsed times
     var timeAdjust = Date.now() - timeStart-time;
+
+    // set the next timer tick with an adjusted delay
     setTimeout(function () { timer(timeStart) }, 1000 - timeAdjust);
 }
 
+/**
+ * Decrements the time displayed for a specified table
+ * @param {number} tableNum - the table number indicating which timer to decrement
+ */
 function decTime(tableNum) {
     var tableHeader = document.getElementById("t"+tableNum);
     var str = tableHeader.innerText;
@@ -57,6 +73,9 @@ function decTime(tableNum) {
     tableHeader.innerText = "Table " + tableNum + " " + minStr + ":" + secStr;
 }
 
+/**
+ * Create a new person and add it to the wait list.
+ */
 function addPerson() {
     var listItem = document.createElement("li");
 
@@ -85,9 +104,12 @@ function addPerson() {
     waitlist.appendChild(listItem);
 }
 
+/**
+ * Create a new table and add it to the list of tables.
+ */
 function addTable() {
 
-    timerStarted.push(false);
+    timerStarted.push(false); // store the state of a new timer
     var tableNum = document.getElementsByClassName("header-content").length + 1;
 
     var container = document.createElement("div");
@@ -107,7 +129,8 @@ function addTable() {
     headerId.value = "t" + tableNum;
     headerContent.setAttributeNode(contentClass);
     headerContent.setAttributeNode(headerId);
-    headerContent.innerText = "Table "+tableNum+" "+document.getElementById("defaultTime").value+":00";
+    headerContent.innerText = "Table " + tableNum + " "
+        + document.getElementById("defaultTime").value + ":00";
 
     var buttons = document.createElement("div");
     buttonClass = document.createAttribute("class");
@@ -144,6 +167,9 @@ function addTable() {
     });
 }
 
+/**
+ * Remove the last table in the list of tables.
+ */
 function removeTable() {
     var containers = document.getElementsByClassName("container");
     var lastTable = containers.item(containers.length - 2);
@@ -155,10 +181,14 @@ function removeTable() {
     }
 }
 
+/**
+ * Set the value of all timers to the time specified in the "defaultTime" element.
+ */
 function setTimers() {
     var timerContent = document.getElementsByClassName("header-content");
     for (var i = 0; i < timerContent.length; i++) {
         var s = timerContent.item(i).textContent;
-        timerContent.item(i).textContent = s.substring(0, s.lastIndexOf(" ")+1) + document.getElementById("defaultTime").value + ":00";
+        timerContent.item(i).textContent = s.substring(0, s.lastIndexOf(" ") + 1)
+            + document.getElementById("defaultTime").value + ":00";
     }
 }
