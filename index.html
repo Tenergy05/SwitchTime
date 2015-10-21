@@ -4,18 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Switch Time</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link href="css/flat-ui.css" rel="stylesheet" type="text/css">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
+    
     <script src="javascript/jquery-2.1.1.min.js"></script>
     <script src="javascript/jquery-ui.js"></script>
     <script src="javascript/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="javascript/scripts.js"></script>
 </head>
 <body>
-    
+
     <div class="container">
-        <div id="menu" class="container-header">Switch Time
-            <div id="timerSet">
-                <input id="defaultTime" type="number" min="0" max="99" value="15"/>min <button onclick="setTimers()">Set Timers</button>
+        <div id="menu" class="container-header row">
+            <div class="col-md-8 col-s-12">Welcome to Switch Time!</div>
+            <div id="timerSet" class="row col-md-4 col-s-12">
+                <input id="defaultTime" class="form-control col-xs-4" type="number" min="0" max="99" value="15" />
+                <div id="minute-text" class="col-xs-3">min</div>
+                <button class="btn col-xs-5" onclick="setTimers()">Set Timers</button>
             </div>
         </div>
     </div>
@@ -23,20 +32,19 @@
     <div class="container">
         <div class="container-header">
             <div class="header-content" id="t1">Table 1 15:00</div>
-            <div class="buttons"><button class="add-button" onclick="addTable();">+</button><button id="remove-button" disabled onclick="removeTable();">-</button><button id="s1" onclick="toggleTime(1);">Start</button></div>
+            <div class="buttons"><button class="btn" onclick="addTable();">+</button><button class="btn" id="remove-button" disabled onclick="removeTable();">-</button><button class="btn" id="s1" onclick="toggleTime(1);">Start</button></div>
         </div>
-        <ul id="table1">
-        </ul>
+        <ul id="table1"></ul>
     </div>
 
     <div class="container" id="waitlist-container">
         <div class="container-header">
-            <div class="header-content2">Wait List<button class="add-button" onclick="addPerson();">+</button></div>
+            <div class="header-content2">Wait List<button class="btn" onclick="addPerson();">+</button></div>
         </div>
         <ul id="waitlist">
             <li><input type="text" class="textarea" maxlength="15" onclick="this.focus();" /></li>
         </ul>
-    </div>  
+    </div>
 
 </body>
 </html>
